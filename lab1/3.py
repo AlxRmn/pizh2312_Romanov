@@ -40,6 +40,5 @@ if len(team1_fighters) > len(team2_fighters):
 else:
     hero2.up_lvl()
 
-if team1_fighters:
-    team1_fighters[0].follow_hero(hero1)
-    print(f"Солдат: {team1_fighters[0].id}, Герой: {hero1.id}")
+team1_fighters[0].follow_hero(hero1)
+print(f"Солдат: {team1_fighters[0].id}, Герой: {hero1.id}")
