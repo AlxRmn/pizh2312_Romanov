@@ -1,13 +1,22 @@
-class GoodIfrit:
-
+class Ifrit:
     """
-    A class representing a Good Ifrit with attributes for height, name, and goodness.
-    Supports arithmetic operations, comparisons, and callable behavior.
+    Base class representing a generic Ifrit with height and name attributes.
     """
-    def __init__(self, height, name, goodness):
-        """Initialize an instance with height, name, and goodness."""
+    
+    def __init__(self, height, name):
+        """Initialize an Ifrit with height and name."""
         self.height = height
         self.name = name
+    
+class GoodIfrit(Ifrit):
+    """
+    A class representing a Good Ifrit with an additional goodness attribute.
+    Supports arithmetic operations, comparisons, and callable behavior.
+    """
+    
+    def __init__(self, height, name, goodness):
+        """Initialize an instance with height, name, and goodness."""
+        Ifrit.__init__(self, height, name)
         self.goodness = goodness
     
     def change_goodness(self, value):
@@ -27,7 +36,7 @@ class GoodIfrit:
     def __str__(self):
         """Return a string representation of the instance."""
         return f"Good Ifrit {self.name}, height {self.height}, goodness {self.goodness}"
-
+    
     def __lt__(self, other):
         """Compare instances based on goodness, then height, then name."""
         return (self.goodness, self.height, self.name) < (other.goodness, other.height, other.name)
