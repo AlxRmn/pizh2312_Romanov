@@ -2,7 +2,7 @@ class Ifrit:
     """
     Базовый класс, представляющий Ифрита с атрибутами высоты и имени.
     """
-    
+
     def __init__(self, height: int, name: str):
         """
         Инициализирует Ифрита с высотой и именем.
@@ -17,15 +17,33 @@ class Ifrit:
         Результат:
             None.
         """
-        self.height = height
-        self.name = name
-    
+        self._height = height  
+        self._name = name  
+
+    @property
+    def height(self):
+        """Геттер для высоты."""
+        return self._height
+
+    @height.setter
+    def height(self, value: int):
+        """Сеттер для высоты с проверкой."""
+        if value <= 0:
+            raise ValueError("Высота должна быть положительным числом.")
+        self._height = value
+
+    @property
+    def name(self):
+        """Геттер для имени."""
+        return self._name
+
+
 class GoodIfrit(Ifrit):
     """
     Класс, представляющий Доброго Ифрита с дополнительным атрибутом доброты.
     Поддерживает арифметические операции, сравнения и возможность вызова как функции.
     """
-    
+
     def __init__(self, height: int, name: str, goodness: int):
         """
         Инициализирует экземпляр с высотой, именем и уровнем доброты.
@@ -41,9 +59,21 @@ class GoodIfrit(Ifrit):
         Результат:
             None.
         """
-        Ifrit.__init__(self, height, name)
-        self.goodness = goodness
-    
+        super().__init__(height, name)
+        self._goodness = goodness 
+
+    @property
+    def goodness(self):
+        """Геттер для доброты."""
+        return self._goodness
+
+    @goodness.setter
+    def goodness(self, value: int):
+        """Сеттер для доброты с проверкой."""
+        if value < 0:
+            raise ValueError("Доброта не может быть отрицательной.")
+        self._goodness = value
+
     def change_goodness(self, value: int):
         """
         Изменяет уровень доброты на указанное значение, не позволяя ему опуститься ниже нуля.
@@ -57,10 +87,10 @@ class GoodIfrit(Ifrit):
         Результат:
             None.
         """
-        self.goodness += value
+        self.goodness += value  
         if self.goodness < 0:
             self.goodness = 0
-    
+
     def __add__(self, number: int) -> 'GoodIfrit':
         """
         Возвращает нового Доброго Ифрита с увеличенной высотой на указанное число.
@@ -75,7 +105,7 @@ class GoodIfrit(Ifrit):
             GoodIfrit: Новый экземпляр с увеличенной высотой.
         """
         return GoodIfrit(self.height + number, self.name, self.goodness)
-    
+
     def __call__(self, arg: int) -> int:
         """
         Позволяет вызывать экземпляр как функцию, возвращая (arg * доброта) // высота.
@@ -90,7 +120,7 @@ class GoodIfrit(Ifrit):
             int: Результат выражения (arg * доброта) // высота.
         """
         return (arg * self.goodness) // self.height
-    
+
     def __str__(self) -> str:
         """
         Возвращает строковое представление экземпляра.
@@ -105,7 +135,7 @@ class GoodIfrit(Ifrit):
             str: Строка, описывающая объект.
         """
         return f"Добрый Ифрит {self.name}, высота {self.height}, доброта {self.goodness}"
-    
+
     def __lt__(self, other: 'GoodIfrit') -> bool:
         """
         Сравнивает экземпляры по уровню доброты, затем по высоте и имени.
@@ -120,7 +150,7 @@ class GoodIfrit(Ifrit):
             bool: True, если текущий объект меньше другого.
         """
         return (self.goodness, self.height, self.name) < (other.goodness, other.height, other.name)
-    
+
     def __le__(self, other: 'GoodIfrit') -> bool:
         """
         Сравнивает экземпляры по уровню доброты, затем по высоте и имени (меньше или равно).
@@ -135,7 +165,7 @@ class GoodIfrit(Ifrit):
             bool: True, если текущий объект меньше или равен другому.
         """
         return (self.goodness, self.height, self.name) <= (other.goodness, other.height, other.name)
-    
+
     def __gt__(self, other: 'GoodIfrit') -> bool:
         """
         Сравнивает экземпляры по уровню доброты, затем по высоте и имени (больше).
@@ -150,7 +180,7 @@ class GoodIfrit(Ifrit):
             bool: True, если текущий объект больше другого.
         """
         return (self.goodness, self.height, self.name) > (other.goodness, other.height, other.name)
-    
+
     def __ge__(self, other: 'GoodIfrit') -> bool:
         """
         Сравнивает экземпляры по уровню доброты, затем по высоте и имени (больше или равно).
@@ -165,7 +195,7 @@ class GoodIfrit(Ifrit):
             bool: True, если текущий объект больше или равен другому.
         """
         return (self.goodness, self.height, self.name) >= (other.goodness, other.height, other.name)
-    
+
     def __eq__(self, other: 'GoodIfrit') -> bool:
         """
         Сравнивает экземпляры на равенство по доброте, высоте и имени.
@@ -180,7 +210,7 @@ class GoodIfrit(Ifrit):
             bool: True, если экземпляры равны.
         """
         return (self.goodness, self.height, self.name) == (other.goodness, other.height, other.name)
-    
+
     def __ne__(self, other: 'GoodIfrit') -> bool:
         """
         Сравнивает экземпляры на неравенство по доброте, высоте и имени.
@@ -196,17 +226,15 @@ class GoodIfrit(Ifrit):
         """
         return (self.goodness, self.height, self.name) != (other.goodness, other.height, other.name)
 
-# 1
+# Пример 1
+gi = GoodIfrit(80, "Hazrul", 3)
+gi.change_goodness(4)
+print(gi)
+gi1 = gi + 15
+print(gi1)
+print(gi(31))
 
-gi = GoodIfrit(80, "Hazrul", 3)  
-gi.change_goodness(4)  
-print(gi)  
-gi1 = gi + 15  
-print(gi1)  
-print(gi(31))  
-
-# 2
-
+# Пример 2
 gi = GoodIfrit(80, "Hazrul", 3)
 gi1 = GoodIfrit(80, "Dalziel", 1)
 print(gi < gi1)
