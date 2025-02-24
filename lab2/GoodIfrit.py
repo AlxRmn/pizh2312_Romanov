@@ -1,44 +1,40 @@
 class Ifrit:
-    """
-    Base class representing a generic Ifrit with height and name attributes.
-    """
+    """Базовый класс, представляющий Ифрита с атрибутами высоты и имени."""
     
     def __init__(self, height, name):
-        """Initialize an Ifrit with height and name."""
+        """Инициализирует Ифрита с высотой и именем."""
         self.height = height
         self.name = name
     
 class GoodIfrit(Ifrit):
-    """
-    A class representing a Good Ifrit with an additional goodness attribute.
-    Supports arithmetic operations, comparisons, and callable behavior.
-    """
+    """Класс, представляющий Доброго Ифрита с дополнительным атрибутом доброты.
+    Поддерживает арифметические операции, сравнения и возможность вызова как функции."""
     
     def __init__(self, height, name, goodness):
-        """Initialize an instance with height, name, and goodness."""
+        """Инициализирует экземпляр с высотой, именем и уровнем доброты."""
         Ifrit.__init__(self, height, name)
         self.goodness = goodness
     
     def change_goodness(self, value):
-        """Modify goodness by a given value, ensuring it does not go below zero."""
+        """Изменяет уровень доброты на указанное значение, не позволяя ему опуститься ниже нуля."""
         self.goodness += value
-        if self.goodness < 0:
+        if (self.goodness < 0):
             self.goodness = 0
     
     def __add__(self, number):
-        """Return a new GoodIfrit with increased height by the given number."""
+        """Возвращает нового Доброго Ифрита с увеличенной высотой на указанное число."""
         return GoodIfrit(self.height + number, self.name, self.goodness)
     
     def __call__(self, arg):
-        """Enable the instance to be called as a function, returning (arg * goodness) // height."""
+        """Позволяет вызывать экземпляр как функцию, возвращая (arg * доброта) // высота."""
         return (arg * self.goodness) // self.height
     
     def __str__(self):
-        """Return a string representation of the instance."""
-        return f"Good Ifrit {self.name}, height {self.height}, goodness {self.goodness}"
+        """Возвращает строковое представление экземпляра."""
+        return f"Добрый Ифрит {self.name}, высота {self.height}, доброта {self.goodness}"
     
     def __lt__(self, other):
-        """Compare instances based on goodness, then height, then name."""
+        """Сравнивает экземпляры по уровню доброты, затем по высоте и имени."""
         return (self.goodness, self.height, self.name) < (other.goodness, other.height, other.name)
     
     def __le__(self, other):
