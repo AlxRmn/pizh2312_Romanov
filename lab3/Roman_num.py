@@ -66,7 +66,7 @@ class Roman(Number):
             self.__roman = value
         elif type(value) == int:
             super().__init__(value)
-            self.__roman = self.__int_to_roman(value)
+            self.__roman = Roman.__int_to_roman(value)
     
     def get_roman(self) -> str:
         """
@@ -104,7 +104,8 @@ class Roman(Number):
             prev_value = value
         return result
     
-    def __int_to_roman(self, number: int) -> str:
+    @staticmethod
+    def __int_to_roman(number: int) -> str:
         """
         Назначение:
         Преобразует арабское число в римское.
