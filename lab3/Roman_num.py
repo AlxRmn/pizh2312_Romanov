@@ -104,8 +104,7 @@ class Roman(Number):
             prev_value = value
         return result
     
-    @staticmethod
-    def __int_to_roman(number: int) -> str:
+    def __int_to_roman(self, number: int) -> str:
         """
         Назначение:
         Преобразует арабское число в римское.
@@ -116,14 +115,12 @@ class Roman(Number):
         Результат:
         str: Римское число, соответствующее арабскому числу.
         """
-    def __int_to_roman(number: int) -> str:
         result = []
         for arabic, roman in Roman.__int_to_roman_map:
             count = number // arabic  
             result.append(roman * count)  
             number -= arabic * count  
         return ''.join(result)
-
     
     def __add__(self, other) -> 'Roman':
         """
