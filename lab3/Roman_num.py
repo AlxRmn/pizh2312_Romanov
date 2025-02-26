@@ -201,15 +201,79 @@ class Roman(Number):
         return f"{self.get_roman()} ({self.get_value()})"
 
 
+class RomanArithmetic:
+    """
+    Описание:
+    Класс для выполнения арифметических операций с римскими числами.
+    Этот класс позволяет выполнять основные арифметические операции между объектами Roman.
+    """
+    
+    @staticmethod
+    def add(a: Roman, b: Roman) -> Roman:
+        """
+        Назначение:
+        Выполняет сложение двух римских чисел.
+        
+        Параметры:
+        a (Roman): Первое римское число.
+        b (Roman): Второе римское число.
+        
+        Результат:
+        Roman: Результат сложения.
+        """
+        return Roman(a.get_value() + b.get_value())
+    
+    @staticmethod
+    def subtract(a: Roman, b: Roman) -> Roman:
+        """
+        Назначение:
+        Выполняет вычитание двух римских чисел.
+        
+        Параметры:
+        a (Roman): Первое римское число.
+        b (Roman): Второе римское число.
+        
+        Результат:
+        Roman: Результат вычитания.
+        """
+        return Roman(a.get_value() - b.get_value())
+    
+    @staticmethod
+    def multiply(a: Roman, b: Roman) -> Roman:
+        """
+        Назначение:
+        Выполняет умножение двух римских чисел.
+        
+        Параметры:
+        a (Roman): Первое римское число.
+        b (Roman): Второе римское число.
+        
+        Результат:
+        Roman: Результат умножения.
+        """
+        return Roman(a.get_value() * b.get_value())
+    
+    @staticmethod
+    def divide(a: Roman, b: Roman) -> Roman:
+        """
+        Назначение:
+        Выполняет деление двух римских чисел.
+        
+        Параметры:
+        a (Roman): Первое римское число.
+        b (Roman): Второе римское число.
+        
+        Результат:
+        Roman: Результат деления.
+        """
+        return Roman(a.get_value() // b.get_value())
+
+
 # Пример использования
 a = Roman("X")
 b = Roman(5)
 
-print(a)  # X (10)
-print(b)  # V (5)
-
-# Операции
-print(a + b)  # XV (15)
-print(a - b)  # V (5)
-print(a * 2)  # XX (20)
-print(a / b)  # II (2)
+print(f"Сложение: {RomanArithmetic.add(a, b)}")  # XV (15)
+print(f"Вычитание: {RomanArithmetic.subtract(a, b)}")  # V (5)
+print(f"Умножение: {RomanArithmetic.multiply(a, b)}")  # XX (20)
+print(f"Деление: {RomanArithmetic.divide(a, b)}")  # II (2)
