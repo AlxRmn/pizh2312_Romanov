@@ -1,4 +1,5 @@
 # main.py - тестирование класса
+from line_segment import LineSegment
 
 segment = LineSegment(0, 0, 3, 4)
 print(segment)  # LineSegment((0, 0) - (3, 4))
