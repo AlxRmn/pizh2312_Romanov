@@ -119,3 +119,33 @@ public:
         }
     }
 };
+
+int main() {
+    // Создание объекта журнала с помощью конструктора по умолчанию
+    RegistrationJournal journal;
+    journal.setOrganizationInfo("Компания Рога и Копыта", "+7-123-456-7890");
+
+    // Создание клиентов разными способами
+    Client client1; // конструктор по умолчанию
+    client1.setClient("Иван Иванов", "г. Москва", "Договор №123");
+
+    Client client2("Петр Петров", "г. Санкт-Петербург", "Договор №456"); // конструктор с параметрами
+
+    Client client3 = client2; // конструктор копирования (копируем client2 в client3)
+
+    // Добавляем клиентов через обычный метод
+    journal.addClient(client1);
+    journal.addClient(client2);
+    journal.addClient(client3);
+
+    // Добавляем нового клиента через метод createAndAddClient
+    journal.createAndAddClient("Анна Смирнова", "г. Казань", "Договор №789");
+
+    // Копируем клиента (client1) три раза через метод copyAndAddClient
+    journal.copyAndAddClient(client1, 3);
+
+    // Вывод содержимого журнала
+    journal.displayJournal();
+
+    return 0;
+}
