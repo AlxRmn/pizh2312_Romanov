@@ -141,3 +141,44 @@ public:
     }
 };
 
+int main() {
+    cout << "\n Примеры объектов базового и производных классов" << endl;
+
+    // Объекты базового и производных классов
+    Service baseService("Общая услуга", 1500);
+    InternetService netService("Домашний интернет", 1000, 100);
+    PhoneService phoneService("Мобильная связь", 500, 300);
+
+    baseService.display();
+    netService.display();
+    phoneService.display();
+
+    cout << "\n Массив объектов базового класса (с наследниками)" << endl;
+    vector<Service*> services;
+    services.push_back(new Service("Хостинг", 200));
+    services.push_back(new InternetService("Интернет 50 Мбит", 800, 50));
+    services.push_back(new PhoneService("Звонки Россия", 300, 200));
+
+    for (auto s : services) {
+        s->display();
+        cout << "------------------------" << endl;
+    }
+
+    for (auto s : services) {
+        delete s;
+    }
+
+    cout << "\n=== Массив объектов одного класса-наследника (InternetService) ===" << endl;
+    vector<InternetService> internetPlans = {
+        InternetService("Интернет A", 700, 30),
+        InternetService("Интернет B", 1200, 100),
+        InternetService("Интернет C", 1600, 200)
+    };
+
+    for (const auto& plan : internetPlans) {
+        plan.display();
+        cout << "------------------------" << endl;
+    }
+
+    return 0;
+}
