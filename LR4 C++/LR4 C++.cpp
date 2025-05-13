@@ -25,3 +25,25 @@ public:
 
     virtual void displayClient() const = 0;
 };
+
+// Класс-наследник — частное лицо
+class IndividualClient : public Client {
+private:
+    string passportNumber;
+
+public:
+    IndividualClient(string n, string a, string c, string p)
+        : Client(n, a, c), passportNumber(p) {
+        cout << "[IndividualClient] Конструктор\n";
+    }
+
+    ~IndividualClient() {
+        cout << "[IndividualClient] Деструктор\n";
+    }
+
+    void displayClient() const override {
+        cout << "=== Частный клиент ===\n";
+        cout << "Имя: " << name << ", Адрес: " << address << ", Договор: " << contractNumber
+            << ", Паспорт: " << passportNumber << endl;
+    }
+};
