@@ -147,8 +147,6 @@ int main() {
 
     journal.addClient(new IndividualClient("Иван Иванов", "Москва", "Д-1", "1234 567890"));
     journal.addClient(new CorporateClient("Петр Петров", "СПб", "Д-2", "ООО Вектор", "1234567890"));
-
-    cout << "\nПосле создания объектов:" << endl;
     cout << "Количество объектов Client: " << Client::getObjectCount() << endl;
     cout << "Количество клиентов в журнале: " << RegistrationJournal::getInternalClientCount() << endl;
 
