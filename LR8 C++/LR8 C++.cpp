@@ -108,3 +108,55 @@ void nestedCallThrow() {
 void anotherNested() {
     throw 42;  
 }
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    RegistrationJournal journal("Компания Тест");
+
+    try {
+        try {
+            journal.addClient(new IndividualClient("Иван", "Москва", "Д-1", "1234 567890"));
+            journal.addClient(new CorporateClient("Петр", "СПб", "Д-2", "ООО Альфа", "123456789")); // Ошибка длины
+        }
+        catch (const length_error& le) {
+            cout << "[Поймано] std::length_error: " << le.what() << endl;
+        }
+
+        try {
+            journal.getClient(10)->displayClient(); // Ошибка диапазона
+        }
+        catch (const out_of_range& e) {
+            cout << "[Поймано] std::out_of_range: " << e.what() << endl;
+        }
+
+        journal.displayJournal();
+
+        try {
+            nestedCallThrow();
+        }
+        catch (const string& s) {
+            cout << "[Поймано] Исключение string: " << s << endl;
+        }
+
+        try {
+            anotherNested();
+        }
+        catch (int code) {
+            cout << "[Поймано] Исключение int: " << code << endl;
+        }
+
+        journal.addClient(nullptr); // Собственное исключение
+    }
+    catch (const MyRuntimeError& e) {
+        cout << "[Поймано] MyRuntimeError: " << e.what() << endl;
+    }
+    catch (const exception& e) {
+        cout << "[Поймано] Стандартное исключение: " << e.what() << endl;
+    }
+    catch (...) {
+        cout << "[Поймано] Неизвестное исключение (catch(...))\n";
+    }
+
+    return 0;
+}
